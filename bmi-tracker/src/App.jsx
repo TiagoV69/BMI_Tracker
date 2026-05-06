@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import BmiForm from './components/BmiForm/BmiForm';
+import Info from './components/Info/Info';
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
     <div>
       <h1>BMI Tracker</h1>
       <BmiForm onAgregar={agregarRegistro} />
+      <Info registros={registros} />
     </div>
   );
 };
