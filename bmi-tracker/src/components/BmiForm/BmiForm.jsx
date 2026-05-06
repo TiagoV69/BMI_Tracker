@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { calcularIMC, obtenerCategoria } from '../../helpers/bmi';
 
-const BmiForm = () => {
+const BmiForm = ({ onAgregar }) => {
 
   const [peso, setPeso] = useState('');
   const [altura, setAltura] = useState('');
@@ -14,6 +14,10 @@ const BmiForm = () => {
     const categoria = obtenerCategoria(imc);
 
     setResultado({ imc, categoria });
+    onAgregar({ imc, categoria, peso, altura });
+
+    setPeso('');
+    setAltura('');
   };
 
   return (
