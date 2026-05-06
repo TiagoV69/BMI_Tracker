@@ -1,9 +1,20 @@
 import { useState } from 'react';
+import { calcularIMC, obtenerCategoria } from '../../helpers/bmi';
 
 const BmiForm = () => {
 
   const [peso, setPeso] = useState('');
   const [altura, setAltura] = useState('');
+  const [resultado, setResultado] = useState(null);
+
+  const handleCalcular = () => {
+    if (!peso || !altura) return;
+
+    const imc = calcularIMC(peso, altura);
+    const categoria = obtenerCategoria(imc);
+
+    setResultado({ imc, categoria });
+  };
 
   return (
     <div>
@@ -23,7 +34,14 @@ const BmiForm = () => {
         onChange={(e) => setAltura(e.target.value)}
       />
 
-      <button>Calcular</button>
+      <button onClick={handleCalcular}>Calcular</button>
+
+      {resultado && (
+        <div>
+          <p>Tu IMC es: {resultado.imc}</p>
+          <p>Categoría: {resultado.categoria}</p>
+        </div>
+      )}
     </div>
   );
 };
